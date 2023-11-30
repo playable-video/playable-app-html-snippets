@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diablo IV</title>
+    <title>James Bond</title>
     <style>
       /* Basic CSS reset for body */
       body,
@@ -50,19 +50,9 @@
   </head>
   <body>
     <a id="close" href="#" onclick="appboyBridge.closeMessage()">X</a>
-    <video
-      id="video"
-      poster="https://cdn.playable.video/activisionblizzard.playable.video/v:6731474332549120/3/6731474332549120/16:9/-/lowsrc.jpg" 
-      loop=""
-      muted=""
-      autoplay=""
-      playsinline=""
-      webkit-playsinline="" 
-      >
-      <source media="(-webkit-video-playable-inline) and (-webkit-min-device-pixel-ratio: 3)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120.uid_{{${user_id}}}/video@3x.mp4" type="video/mp4"></source>
-      <source media="(-webkit-video-playable-inline) and (-webkit-min-device-pixel-ratio: 2)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120.uid_{{${user_id}}}/video@2x.mp4" type="video/mp4"></source>
-      <source media="(-webkit-video-playable-inline)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120.uid_{{${user_id}}}/video.webm" type="video/webm"></source>
-      <source media="(-webkit-video-playable-inline)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120.uid_{{${user_id}}}/video.mp4" type="video/mp4"></source>
+    <video id="video" autoplay muted loop playsinline webkit-playsinline>
+      <source src="video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
   </body>
 </html>
