@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diablo IV - VideoJS</title>
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+    <style>
+      /* Basic CSS reset for body */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <video-js
+    id="video"
+    class="vjs-theme-forest"
+    poster="https://cdn.playable.video/activisionblizzard.playable.video/v:6731474332549120/3/6731474332549120/16:9/-/lowsrc.jpg"
+    data-setup='{
+      "controls": true,
+      "autoplay": "muted",
+      "preload": "auto",
+      "playsinline": true,
+      "fill": true,
+      "loop": true
+    }'
+  >
+        <source media="(-webkit-video-playable-inline) and (-webkit-min-device-pixel-ratio: 3)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120/video@3x.mp4" type="video/mp4"></source>
+        <source media="(-webkit-video-playable-inline) and (-webkit-min-device-pixel-ratio: 2)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120/video@2x.mp4" type="video/mp4"></source>
+        <source media="(-webkit-video-playable-inline)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120/video.webm" type="video/webm"></source>
+        <source media="(-webkit-video-playable-inline)" src="https://activisionblizzard.playable.video/xid_v:6731474332549120/video.mp4" type="video/mp4"></source>
+  </video-js>
+  <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+  </body>
+</html>
