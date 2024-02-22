@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playable Demo - Diablo IV</title>
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet">
+    <style>
+      /* Basic CSS reset for body */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: black;
+      }
+      a {
+        z-index: 2;
+        position: absolute;
+        font-family: Arial, Helvetica, sans-serif;
+        height: 40px;
+        width: 40px;
+        font-size: 22px;
+        line-height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 50%;
+        background-color: 'transparent';
+        font-weight: normal;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        right: 25px;
+      }
+      #close {
+        background: radial-gradient(#ffffff, #ffffff, #ffffff00, #ffffff00);
+        color: black;
+        top: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <a id="close" href="#" onclick="appboyBridge.closeMessage()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+    </a>
+    <video-js
+    id="video"
+    class="vjs-theme-city"
+    poster="https://cdn.playable.video/demo.playable.video/demo:6196552852045824/0/6196552852045824/16:9/-/lowsrc.jpg"
+    data-setup='{
+      "controls": true,
+      "autoplay": "muted",
+      "preload": "auto",
+      "playsinline": true,
+      "fill": true,
+      "loop": true
+    }'
+  >
+        <source src="https://demo.playable.video/xid_demo:6196552852045824/video.webm" type="video/webm"></source>
+  </video-js>
+  <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+  </body>
+</html>
