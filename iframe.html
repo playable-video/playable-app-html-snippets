@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iFrame</title>
+    <title>Playable Demo - Interactive Event</title>
     <style>
       /* Basic CSS reset for body */
       body,
@@ -17,9 +17,34 @@
         background-color: black;
         border: none;
       }
+      #close {
+        z-index: 2;
+        position: absolute;
+        font-family: Arial, Helvetica, sans-serif;
+        right: 25px;
+        top: 25px;
+        height: 40px;
+        width: 40px;
+        font-size: 22px;
+        line-height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 50%;
+        background-color: white;
+        font-weight: normal;
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        background: radial-gradient(#ffffff, #ffffff, #ffffff00, #ffffff00);
+      }
     </style>
   </head>
   <body>
+     <a id="close" href="#" onclick="appboyBridge.closeMessage()">
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
+       </svg>
+     </a>
     <iframe
       src="https://cdn1.playable.video/prototypes/braze-interactive-demo/index.html"
     ></iframe>
