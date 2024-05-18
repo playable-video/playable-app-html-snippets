@@ -6,9 +6,11 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Single Page Modal</title>
+    <link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <title>THE WAR WITHIN™</title>
     <style>
-        /* fonts */
         @font-face {
             font-family: 'Sailec Bold';
             src: url('https://appboy-images.com/appboy/communication/assets/font_assets/files/5f2d540126e78f1669f53229/original.otf?1596806145') format('truetype');
@@ -18,10 +20,12 @@
             font-family: 'Sailec Normal';
             src: url('https://appboy-images.com/appboy/communication/assets/font_assets/files/5f2d5401ff0a7415251998d6/original.otf?1596806145') format('truetype');
         }
+        
 
         :root {
-            --header-font-stack: 'Object Sans', 'Helvetica', 'Arial', sans-serif;
-            --body-font-stack: 'Object Sans', 'Helvetica', 'Arial', sans-serif;
+            --font-title: "Metamorphous", sans-serif;
+            --font-button: "Roboto", sans-serif;
+            --font-description: "Open Sans", sans-serif;
         }
 
         /* Box sizing rules */
@@ -57,7 +61,6 @@
 
         /* Set core body defaults */
         body {
-            min-height: 100vh;
             scroll-behavior: smooth;
             text-rendering: optimizeSpeed;
             line-height: 1.5;
@@ -115,34 +118,33 @@
         }
 
         .modal {
-            display: flex;
-            height: 450px;
-            max-width: 900px;
-            flex-basis: 900px;
+            height: auto;
+            max-width: 330px;
+            flex-basis: 330px;
             margin: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
         .modal__image {
-            height: 450px;
-            max-width: 450px;
-            flex-basis: 450px;
+            height: 330px;
         }
 
         .modal__image video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 10px 10px 0px 0px;
         }
 
         .modal__content {
             display: flex;
             flex-direction: column;
             position: relative;
-            height: 450px;
-            max-width: 450px;
-            flex-basis: 450px;
-            padding: 60px 40px 40px;
+            padding: 20px 14px 20px 14px;
             background-color: rgb(0, 0, 0);
+            border-radius: 0px 0px 10px 10px;
         }
 
         .modal__cross {
@@ -153,6 +155,11 @@
             width: 28px;
             cursor: pointer;
             z-index: 1;
+            border-radius: 50%;
+            background: rgba(128, 128, 128, .2);
+            display: flex !important;
+            justify-content: center;
+            padding: 1px;
         }
 
         .modal__mute {
@@ -163,22 +170,28 @@
             width: 28px;
             cursor: pointer;
             z-index: 1;
+            border-radius: 50%;
+            background: rgba(128, 128, 128, .2);
+            display: flex !important;
+            justify-content: center;
+            padding: 1px;
         }
 
         .modal__title {
-            width: 300px;
             margin-bottom: 10px;
-            font-size: 36px;
+            font-size: 22px;
             line-height: 1.2;
             color: #ffffff;
-            font-family: var(--header-font-stack);
+            font-family: var(--font-title);
+            text-align: center;
         }
 
         .modal__sub-title {
-            margin-bottom: 10px;
-            font-family: var(--header-font-stack);
-            font-size: 16px;
-            color: #76848C;
+            margin-bottom: 8px;
+            font-family: var(--font-description);
+            font-size: 1rem;
+            color: hsla(0, 0%, 100%, 0.7);
+            text-align: left;
         }
 
         .modal__text {
@@ -189,177 +202,92 @@
         }
 
         .modal__button-wrap {
-            margin-top: auto;
-            justify-content: space-around;
             display: flex;
+            margin-top: auto;
+            margin-left: 0px;
+            justify-content: space-between;
         }
 
         .modal__btn {
             border-radius: 4px;
-            font-family: var(--header-font-stack);
-            font-weight: 700;
-            color: inherit;
-            min-height: 50px;
+            font-family: var(--font-button);
+            font-weight: 600;
+            min-height: 55px;
+            max-height: 55px;
+            width: 150px;
             align-items: center;
             display: flex;
             justify-content: center;
-            min-width: 140px;
             text-align: center;
         }
 
         .modal__btn--main {
-            margin-left: 10px;
-            padding: 8px 16px;
-            background-color: #0074e0;
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            background-image: url('https://world-of-warcraft-dragon-flight.s3.us-west-2.amazonaws.com/Grey+WoW+Button.png');
+            background-size: 150px 55px;
+            background-repeat: no-repeat;
+        }
+
+         /* this is the secondary button style, can be used if they want the buttons to appear different*/
+        .modal__btn--secondary {    
             color: rgb(255, 255, 255);
             font-size: 14px;
+            background-image: url('https://world-of-warcraft-dragon-flight.s3.us-west-2.amazonaws.com/Blue+WoW+Button.png');
+            background-size: 150px 55px;
+            background-repeat: no-repeat;   
         }
-
-        .modal__btn--secondary {
-            padding: 8px 16px;
-            border: 1px solid #A8B3B8;
-            color: rgb(255, 255, 255);
-            font-size: 14px;
-        }
-
-        .modal__cross-mobile {
-            display: none !important;
-        }
-
-        .modal__mute-mobile {
-            display: none !important;
-        }
-        .modal__mute-desktop{
-            border-radius: 50%;
-                background: rgba(128, 128, 128, .2);
-                display: flex !important;
-                justify-content: center;
-                padding: 1px;
-        }
+ 
         .hide{ display: none;}
         .txt-style{border-radius:20px;}
 
+        
+
         /*Phones*/
-        @media (max-width: 900px) {
-            .modal {
-                height: auto;
-                max-width: 330px;
-                flex-basis: 330px;
-                margin: auto;
-                display: flex;
-                flex-direction: column;
-                position: relative;
-            }
+        /* Small devices (portrait tablets and large phones) */
 
-            .modal__cross-mobile {
-                border-radius: 50%;
-                background: rgba(128, 128, 128, .2);
-                display: flex !important;
-                justify-content: center;
-                padding: 1px;
-            }
-
-            .modal__mute-mobile {
-                border-radius: 50%;
-                background: rgba(128, 128, 128, .2);
-                display: flex !important;
-                justify-content: center;
-                padding: 1px;
-            }
-            .modal__mute-desktop{
-                display: none !important;
-            }
-
-            .modal__cross-web {
-                display: none !important;
-            }
-
-            .modal__title,
-            .modal__sub-title {
-                margin-bottom: 8px;
+        @media (max-width: 360px) and (min-width: 0px) {
+            .modal__image {
+                height: 260px;
             }
 
             .modal__title {
-                font-size: 23px;
+                font-size: 19px;
             }
+
+            .modal__sub-title {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 380px) and (min-width: 350px), (max-height: 700px) and (min-height: 600px) {
+            .modal__image {
+                height: 260px;
+            }
+
+            .modal__title {
+                font-size: 19px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media (max-width: 400px) and (min-width: 380px), (max-height: 800px) and (min-height: 700px) {
 
             .modal__image {
-                height: 330px;
-                flex-basis: 330px;
+                height: 290px;
             }
 
-            .modal__content {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                height: auto;
-                max-width: 330px;
-                flex-basis: auto;
-                padding: 24px 16px 24px 16px;
-                background-color: rgb(0, 0, 0);
+            .modal__title {
+                font-size: 20px;
             }
 
-            .modal__button-wrap {
-                display: flex;
-                margin-top: 24px;
-                margin-left: 0px;
-                justify-content: space-between;
+            .modal__sub-title {
+                font-size: 0.9rem;
             }
-
-            .modal__btn {
-                width: 140px;
-                padding: 8px 8px;
-            }
-
-            .modal__carousel-toggle {
-                background-color: transparent;
-            }
-
-            .modal__carousel-navigation.is-active {
-                background-color: white;
-            }
-            .hide{ display: none;}
-            .txt-style{border-radius:20px; width: 60%;}
-        }
-
-        @media (orientation: landscape) and (max-width: 900px) {
-            .modal {
-                max-width: 660px;
-                flex-basis: 660px;
-            }
-
-            .modal {
-                display: flex;
-                flex-direction: row;
-                height: 330px;
-                margin: auto;
-            }
-
-            .modal__cross {
-                right: unset;
-                left: 14px;
-            }
-            .hide{ display: none;}
-            .txt-style{border-radius:20px;}
-        }
-
-        @media (orientation: landscape) and (max-width: 569px) {
-            .modal {
-                max-width: 568px;
-                flex-basis: 568px;
-            }
-
-            .overlay {
-                overflow-y: scroll;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .overlay {
-                overflow-y: scroll;
-            }
-            .hide{ display: none;}
-            .txt-style{border-radius:20px;}
         }
     </style>
 </head>
@@ -367,41 +295,35 @@
 <body>
     <div class="overlay">
         <div class="modal">
-            <a data-button-id="close" class="modal__cross modal__cross-mobile" onclick="brazeBridge.closeMessage()">
+            <a data-button-id="close" class="modal__cross" onclick="brazeBridge.closeMessage()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="rgba(0, 0, 0, 0.7)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" part="icon blz-icon"><path d="M18 6 6 18M6 6l12 12"></path></svg>
             </a>
-            <a button-id="mute" class="modal__mute modal__mute-mobile" onclick="toggleSound()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512" ><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z"></path></svg>
+            <a button-id="mute" class="modal__mute" onclick="toggleSound()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"></path></svg>
             </a>
             <div class="modal__image">
                 <video id="video" muted autoplay playsinline>
-                    <source id="source" src=" https://cdn.playable.video/editor/5881057547911168/clickplay.mp4" type="video/mp4">
+                    <source id="source" src="https://cdn.playable.video/editor/5881057547911168/clickplay.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="modal__content">
-                <a data-button-id="close" class="modal__cross modal__cross-web" onclick="brazeBridge.closeMessage()">
-                    <!-- SVG for cross button here -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="rgba(255, 255, 255, 0.7)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 25 25" part="icon blz-icon"><path d="M18 6 6 18M6 6l12 12"></path></svg>
-                </a>
-                <a button-id="mute" class="modal__mute modal__mute-desktop" onclick="toggleSound()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, 0.7)" viewBox="0 0 640 512" ><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z"></path></svg>
-                </a>
-                <h1 id="title" class="modal__title">Dragon Flight</h1>
-                <h2 class="modal__sub-title"></h2>
-                <div id="questions" class="modal__button-wrap hide">
-                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDracthyr()">Dracthyr</a> 
-                    <!-- onclick="brazeBridge.logClick('1');brazeBridge.closeMessage()" -->
-                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDragonIsles()">Dragon Isles</a>
+                <h1 id="title" class="modal__title">Take wing to a new beginning</h1>
+                <h2 id="sub_title" class="modal__sub-title">Join forces with the dragonflights of Azeroth as they return to the Dragon Isles, a lost realm of magic and wonder. There await the dracthyr evokers, an all-new playable race and class of humanoid dragonkin who stand ready to join the ranks of the Horde and Alliance.</h2>
+                <div id="options" class="modal__button-wrap hide">
+                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDracthyr()">Dracthyr   </a>
+                    <a href="#" class="modal__btn modal__btn--secondary" onclick="PlayDragonIsles()">Dragon Isles</a>
                 </div>
                 <div id="DracthyrDiv" class="modal__button-wrap hide">
-                    <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--main">Pre-Purchase</a> 
-                    <!-- onclick="brazeBridge.logClick('1');brazeBridge.closeMessage()" -->
-                    <a href="https://dragonflight.blizzard.com/en-us/" target="_blank" class="modal__btn modal__btn--main" >Learn More</a>
+                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDragonIsles()">Dragon Isles</a>
+                    <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--secondary">Pre-Purchase</a>
                 </div>
-                <div id="DragonIslesrDiv" class="modal__button-wrap hide">
-                    <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--main">Pre-Purchase</a> 
-                    <!-- onclick="brazeBridge.logClick('1');brazeBridge.closeMessage()" -->
-                    <a href="https://dragonflight.blizzard.com/en-us/" target="_blank" class="modal__btn modal__btn--main" >Learn More</a>
+                <div id="DragonIslesDiv" class="modal__button-wrap hide">
+                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDracthyr()">Dracthyr</a>
+                    <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--secondary">Pre-Purchase</a>
+                </div>
+                <div id="modal_complete" class="modal__button-wrap hide">
+                    <a href="https://dragonflight.blizzard.com/en-us/" target="_blank" class="modal__btn modal__btn--main">Learn More</a>
+                    <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--secondary">Pre-Purchase</a>
                 </div>
             </div>
         </div>
@@ -409,68 +331,50 @@
 
     <script>
         let videoCurrent = '';
-       
+        let videosPlayed = 0;
+
         let aud = document.getElementById("video");
-    aud.onended = function() {
-        if(videoCurrent === '')
-        {
-            let videoEndBtn = document.getElementById("questions");
-            videoEndBtn.classList.remove('hide');
-        }
-        else if(videoCurrent === 'Dracthyr')
-        {
-            let videoEndBtn = document.getElementById("questions");
-            videoEndBtn.classList.add('hide');
-            let videoDragonIslesBtn = document.getElementById("DragonIslesDiv");
-            if(videoDragonIslesBtn != null)
-            {
-                videoDragonIslesBtn.classList.add('hide');
+        aud.onended = function () {
+            videosPlayed++;
+            if (videosPlayed === 3) {
+                hideAllDivs();
+                document.getElementById("modal_complete").classList.remove('hide');
+            } else {
+                showRelevantDiv();
             }
+        };
 
-            let videoTitle = document.getElementById("title");
-            videoEndBtn.textContent = 'Dracthyr';
-
-            let videoDracthyrBtn = document.getElementById("DracthyrDiv");
-            videoDracthyrBtn.classList.remove('hide');
+        function hideAllDivs() {
+            document.getElementById("options").classList.add('hide');
+            document.getElementById("DracthyrDiv").classList.add('hide');
+            document.getElementById("DragonIslesDiv").classList.add('hide');
         }
-        else if(videoCurrent === 'DragonIsles')
-        {
-            let videoEndBtn = document.getElementById("questions");
-            videoEndBtn.classList.add('hide');
-            let videoDracthyrBtn = document.getElementById("DracthyrDiv");
-            if(videoDracthyrBtn != null)
-            {
-                videoDracthyrBtn.classList.add('hide');
+
+        function showRelevantDiv() {
+            if (videoCurrent === '') {
+                document.getElementById("options").classList.remove('hide');
+            } else if (videoCurrent === 'Dracthyr') {
+                document.getElementById("DracthyrDiv").classList.remove('hide');
+            } else if (videoCurrent === 'DragonIsles') {
+                document.getElementById("DragonIslesDiv").classList.remove('hide');
             }
-            let videoTitle = document.getElementById("title");
-            videoEndBtn.textContent = 'Dragon Isles';
-
-            let videoDragonIslesBtn = document.getElementById("DragonIslesrDiv");
-            videoDragonIslesBtn.classList.remove('hide');
         }
-       
-    };
 
         document.querySelectorAll('[data-button-id]').forEach(function (node) {
             node.addEventListener('click', function () {
                 brazeBridge.closeMessage();
             });
         });
-        
+
         function toggleSound() {
             var video = document.getElementById('video');
             var muteButton = document.querySelector('.modal__mute');
-            var muteDesktopButton = document.querySelector('.modal__mute-desktop');
             video.muted = !video.muted;
             console.log('Sound toggled. Muted:', video.muted);
             if (video.muted) {
-                // Change SVG when muted
-                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512" ><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z"></path></svg>';
-                muteDesktopButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, 0.7)" viewBox="0 0 640 512" ><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z"></path></svg>';
+                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"></path></svg>';
             } else {
-                // Change SVG when unmuted
-                muteButton.innerHTML = '<svg  xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512" ><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"></path></svg>';
-                muteDesktopButton.innerHTML = '<svg  xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, 0.7)" viewBox="0 0 640 512" ><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"></path></svg>';
+                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512"><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"></path></svg>';
             }
         }
 
@@ -478,50 +382,28 @@
             videoCurrent = 'Dracthyr';
             var video = document.getElementById('video');
             const source = document.getElementById('source');
-            
-            let videoEndBtn = document.getElementById("questions");
-            if(videoEndBtn != null)
-            {
-                videoEndBtn.classList.add('hide');
-            }
-
-            let videoDragonIslesBtn = document.getElementById("DragonIslesDiv");
-            if(videoDragonIslesBtn != null)
-            {
-                videoDragonIslesBtn.classList.add('hide');
-            }
-
-            let videoTitle = document.getElementById("title");
-            videoTitle.textContent = 'Dracthyr';
-
+            hideAllDivs();
+            let video_title = document.getElementById("title");
+            video_title.textContent = 'All-new Race: The Dracthyr';
+            video_title.style.fontSize = '20px';
+            let video_sub_title = document.getElementById("sub_title");
+            video_sub_title.textContent = 'Created by Neltharion the Earth-Warder, the essence of dragons was combined with the adaptability of the mortal races to create an elite soldier capable of switching from a draconic form to humanoid form.';
             source.setAttribute('src', `https://cdn.playable.video/editor/6716589882474496/clickplay.mp4`);
-            video.load();           
+            video.load();
         }
 
         function PlayDragonIsles() {
             videoCurrent = 'DragonIsles';
             var video = document.getElementById('video');
             const source = document.getElementById('source');
-            
-            let videoEndBtn = document.getElementById("questions");
-            if(videoEndBtn != null)
-            {
-                videoEndBtn.classList.add('hide');
-            }
-            
-            let videoDracthyrBtn = document.getElementById("DracthyrDiv");
-            if(videoDracthyrBtn != null)
-            {
-                videoDracthyrBtn.classList.add('hide');
-            }
-
-            let videoTitle = document.getElementById("title");
-            videoTitle.textContent = 'Dragon Isles';
-
+            hideAllDivs();
+            let video_title = document.getElementById("title");
+            video_title.textContent = 'All-new Zone: The Dragon Isles';
+            let video_sub_title = document.getElementById("sub_title");
+            video_sub_title.textContent = 'The ancestral home of the dragonflights of Azeroth. When the world was broke apart in the Great Sundering, magic drained away and the land went dormant. As the Dragon Isles awaken, so too do old feuds and long-dormant threats.';
             source.setAttribute('src', `https://cdn.playable.video/editor/4877861887148032/clickplay.mp4`);
             video.load();
         }
-       
     </script>
 </body>
 
