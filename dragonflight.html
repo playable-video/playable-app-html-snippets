@@ -21,7 +21,6 @@
             src: url('https://appboy-images.com/appboy/communication/assets/font_assets/files/5f2d5401ff0a7415251998d6/original.otf?1596806145') format('truetype');
         }
         
-
         :root {
             --font-title: "Metamorphous", sans-serif;
             --font-button: "Roboto", sans-serif;
@@ -238,10 +237,22 @@
             background-repeat: no-repeat;   
         }
  
-        .hide{ display: none;}
-        .txt-style{border-radius:20px;}
+        .hide {
+            display: none;
+        }
 
-        
+        .fade {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show {
+            opacity: 1;
+        }
+
+        .txt-style {
+            border-radius: 20px;
+        }
 
         /*Phones*/
         /* Small devices (portrait tablets and large phones) */
@@ -276,7 +287,6 @@
 
         /* Medium devices (landscape tablets, 768px and up) */
         @media (max-width: 400px) and (min-width: 380px), (max-height: 800px) and (min-height: 700px) {
-
             .modal__image {
                 height: 290px;
             }
@@ -309,19 +319,19 @@
             <div class="modal__content">
                 <h1 id="title" class="modal__title">Take wing to a new beginning</h1>
                 <h2 id="sub_title" class="modal__sub-title">Join forces with the dragonflights of Azeroth as they return to the Dragon Isles, a lost realm of magic and wonder. There await the dracthyr evokers, an all-new playable race and class of humanoid dragonkin who stand ready to join the ranks of the Horde and Alliance.</h2>
-                <div id="options" class="modal__button-wrap hide">
-                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDracthyr()">Dracthyr   </a>
+                <div id="options" class="modal__button-wrap hide fade">
+                    <a href="#" class="modal__btn modal__btn--main" onclick="PlayDracthyr()">Dracthyr</a>
                     <a href="#" class="modal__btn modal__btn--secondary" onclick="PlayDragonIsles()">Dragon Isles</a>
                 </div>
-                <div id="DracthyrDiv" class="modal__button-wrap hide">
+                <div id="DracthyrDiv" class="modal__button-wrap hide fade">
                     <a href="#" class="modal__btn modal__btn--main" onclick="PlayDragonIsles()">Dragon Isles</a>
                     <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--secondary">Pre-Purchase</a>
                 </div>
-                <div id="DragonIslesDiv" class="modal__button-wrap hide">
+                <div id="DragonIslesDiv" class="modal__button-wrap hide fade">
                     <a href="#" class="modal__btn modal__btn--main" onclick="PlayDracthyr()">Dracthyr</a>
                     <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--secondary">Pre-Purchase</a>
                 </div>
-                <div id="modal_complete" class="modal__button-wrap hide">
+                <div id="modal_complete" class="modal__button-wrap hide fade">
                     <a href="https://dragonflight.blizzard.com/en-us/" target="_blank" class="modal__btn modal__btn--main">Learn More</a>
                     <a href="https://us.shop.battle.net/en-gb/product/world-of-warcraft-the-war-within" target="_blank" class="modal__btn modal__btn--secondary">Pre-Purchase</a>
                 </div>
@@ -338,25 +348,37 @@
             videosPlayed++;
             if (videosPlayed === 3) {
                 hideAllDivs();
-                document.getElementById("modal_complete").classList.remove('hide');
+                showDiv("modal_complete");
             } else {
                 showRelevantDiv();
             }
         };
 
         function hideAllDivs() {
-            document.getElementById("options").classList.add('hide');
-            document.getElementById("DracthyrDiv").classList.add('hide');
-            document.getElementById("DragonIslesDiv").classList.add('hide');
+            document.querySelectorAll('.modal__button-wrap').forEach((div) => {
+                div.classList.remove('show');
+                div.classList.add('hide');
+                setTimeout(() => {
+                    div.classList.add('hide');
+                }, 2000);
+            });
+        }
+
+        function showDiv(id) {
+            const div = document.getElementById(id);
+            div.classList.remove('hide');
+            setTimeout(() => {
+                div.classList.add('show');
+            }, 10);
         }
 
         function showRelevantDiv() {
             if (videoCurrent === '') {
-                document.getElementById("options").classList.remove('hide');
+                showDiv("options");
             } else if (videoCurrent === 'Dracthyr') {
-                document.getElementById("DracthyrDiv").classList.remove('hide');
+                showDiv("DracthyrDiv");
             } else if (videoCurrent === 'DragonIsles') {
-                document.getElementById("DragonIslesDiv").classList.remove('hide');
+                showDiv("DragonIslesDiv");
             }
         }
 
