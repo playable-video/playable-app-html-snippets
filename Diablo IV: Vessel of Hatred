@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Object Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <title>Test IAM™</title>
+    <style>
+        :root {
+            --font-title: "Object Sans", sans-serif;
+            --font-button: "Object Sans", sans-serif;
+            --font-description: "Noto Sans", sans-serif;
+        }
+
+        /* Box sizing rules */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Remove default padding */
+        ul[class],
+        ol[class] {
+            padding: 0;
+        }
+
+        /* Remove default margin */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        ul[class],
+        ol[class],
+        li,
+        figure,
+        figcaption,
+        blockquote,
+        dl,
+        dd {
+            margin: 0;
+        }
+
+        /* Set core body defaults */
+        body {
+            scroll-behavior: smooth;
+            text-rendering: optimizeSpeed;
+            line-height: 1.25;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Remove list styles on ul, ol elements with a class attribute */
+        ul[class],
+        ol[class] {
+            list-style: none;
+        }
+
+        /* A elements that don't have a class get default styles */
+        a:not([class]) {
+            text-decoration-skip-ink: auto;
+        }
+
+        /* Make images easier to work with */
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Natural flow and rhythm in articles by default */
+        article>*+* {
+            margin-top: 1em;
+        }
+
+        /* Inherit fonts for inputs and buttons */
+        input,
+        button,
+        a,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button,
+        a {
+            border: none;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .overlay {
+            /* full screen overlay, dims background */
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+        }
+
+        .modal {
+            /* foreground modal */
+            height: auto;
+            max-width: 380px;
+            flex-basis: 380px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: rgba(21, 23, 30, 1);
+            border-radius: 8px;
+        }
+
+        .modal__image {
+            /* image container */
+            max-height: 400px;
+            max-width: 340px;
+            margin: auto;
+            margin-top: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .modal__image video {
+            /* video within image container */
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .modal__content {
+            /* text container below image */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 32px 16px 32px 16px;
+        }
+
+        .modal__cross {
+            /* close button */
+            position: absolute;
+            top: 24px;
+            left: 16px;
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+            z-index: 1;
+            display: flex !important;
+            justify-content: center;
+            padding: 1px;
+        }
+
+        .modal__mute {
+            /* mute button, if video has sound */
+            position: absolute;
+            top: 24px;
+            right: 16px;
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+            z-index: 1;
+            display: flex !important;
+            justify-content: center;
+            padding: 1px;
+        }
+
+        .modal__title {
+            /* title text */
+            margin-bottom: 8px;
+            font-size: 16px;
+            line-height: 1.2;
+            color: #ffffff;
+            font-family: var(--font-title);
+            text-align: center;
+        }
+
+        .modal__sub-title {
+            /* description text */
+            margin: auto;
+            font-family: var(--font-description);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.25;
+            color: #ffffff;
+            text-align: center;
+            max-width: 340px;
+        }
+
+        .modal__text {
+            /* body text */
+            margin: auto;
+            font-family: var(--font-description);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.25;
+            color: #ffffff;
+            text-align: center;
+            max-width: 340px;
+        }
+
+        .modal__button-wrap {
+            /* button container */
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        .modal__btn {
+            /* button style */
+            border-radius: 4px;
+            font-family: var(--font-button);
+            font-weight: 700;
+            min-height: 40px;
+            max-height: 40px;
+            width: 160px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .modal__btn--main {
+            /* primary button style */
+            color: #ffffff;
+            font-size: 16px;
+            background-color: #0074E0;
+            background-size: 167px 40px;
+            background-repeat: no-repeat;
+        }
+
+        /* this is the secondary button style, can be used if they want the buttons to appear different*/
+        .modal__btn--secondary {
+            color: #ffffff;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.12);
+            background-size: 167px 40px;
+            background-repeat: no-repeat;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .fade {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show {
+            opacity: 1;
+        }
+
+        .txt-style {
+            border-radius: 20px;
+        }
+
+        /*Phones*/
+        /* Small devices (portrait tablets and large phones) */
+
+        @media (max-width: 360px) and (min-width: 0px) {
+            .modal__image {
+                max-height: 260px;
+            }
+
+            .modal__title {
+                font-size: 19px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 380px) and (min-width: 350px),
+        (max-height: 700px) and (min-height: 600px) {
+            .modal__image {
+                max-height: 260px;
+            }
+
+            .modal__title {
+                font-size: 19px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media (max-width: 400px) and (min-width: 380px),
+        (max-height: 800px) and (min-height: 700px) {
+            .modal__image {
+                max-height: 290px;
+            }
+
+            .modal__title {
+                font-size: 20px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="modal">
+            <a data-button-id="close" class="modal__cross" onclick="brazeBridge.logClick('close');brazeBridge.closeMessage()">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M3.38576 5.19485L10.3569 12L3.38576 18.8051C2.87141 19.3073 2.87141 20.1213 3.38576 20.6234C3.90011 21.1255 4.73404 21.1255 5.24839 20.6234L12 14.0326L18.7516 20.6234C19.266 21.1255 20.0999 21.1255 20.6142 20.6234C21.1286 20.1213 21.1286 19.3073 20.6142 18.8051L13.6431 12L20.6142 5.19485C21.1286 4.69275 21.1286 3.87868 20.6142 3.37658C20.0999 2.87447 19.266 2.87447 18.7516 3.37658L12 9.96744L5.24839 3.37658C4.73404 2.87447 3.90011 2.87447 3.38576 3.37658C2.87141 3.87868 2.87141 4.69275 3.38576 5.19485Z"
+                        fill="white" />
+                </svg>
+            </a>
+            <a button-id="mute" class="modal__mute" onclick="toggleSound();brazeBridge.logClick('mute')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M20.7071 4.70698C21.0976 4.31646 21.0976 3.6833 20.7071 3.29277C20.3166 2.90225 19.6834 2.90225 19.2929 3.29277L3.29289 19.2928C2.90237 19.6833 2.90237 20.3165 3.29289 20.707C3.68342 21.0975 4.31658 21.0975 4.70711 20.707L8.70707 16.707L11.1464 19.1464C11.4614 19.4614 12 19.2383 12 18.7928V13.4141L20.7071 4.70698Z"
+                        fill="white" />
+                    <path
+                        d="M12 5.20706V7.81868L10 9.81868V8.82838L7.82843 10.9999H5V12.9999H6.81873L4.81873 14.9999H4C3.44772 14.9999 3 14.5522 3 13.9999V9.99995C3 9.44766 3.44772 8.99995 4 8.99995H7L11.1464 4.8535C11.4614 4.53852 12 4.7616 12 5.20706Z"
+                        fill="white" />
+                </svg>
+            </a>
+            <div class="modal__image">
+                <video id="video" muted autoplay playsinline loop>
+                    <source id="source" src="https://cdn.playable.video/editor/6104873455845376/clickplay.mp4"
+                        type="video/mp4">
+                </video>
+            </div>
+            <div class="modal__content">
+                <h1 id="title" class="modal__title">Testing IAM Inside Jupiter</h1>
+                <h2 id="sub_title" class="modal__sub-title">Experience Diablo IV in its finest form with major savings on Vessel of Hatred through January 6.</h2>
+                <div id="options" class="modal__button-wrap">
+                    <a href="https://shop.battle.net/product/diablo-iv"
+                        class="modal__btn modal__btn--secondary" onclick="brazeBridge.logClick('Shop')">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Removing long press to open context menus in-app -->
+    <script type="text/javascript" src="https://raw.github.com/pisi/Longclick/master/jquery.longclick-min.js">
+    </script>
+
+    <script>
+
+        document.querySelectorAll('[data-button-id]').forEach(function (node) {
+            node.addEventListener('click', function () {
+                brazeBridge.closeMessage();
+            });
+        });
+
+        function toggleSound() {
+            var video = document.getElementById('video');
+            var muteButton = document.querySelector('.modal__mute');
+            video.muted = !video.muted;
+            console.log('Sound toggled. Muted:', video.muted);
+            if (video.muted) {
+                /*muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"></path></svg>';*/
+                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.7071 4.70698C21.0976 4.31646 21.0976 3.6833 20.7071 3.29277C20.3166 2.90225 19.6834 2.90225 19.2929 3.29277L3.29289 19.2928C2.90237 19.6833 2.90237 20.3165 3.29289 20.707C3.68342 21.0975 4.31658 21.0975 4.70711 20.707L8.70707 16.707L11.1464 19.1464C11.4614 19.4614 12 19.2383 12 18.7928V13.4141L20.7071 4.70698Z" fill="white"/><path d="M12 5.20706V7.81868L10 9.81868V8.82838L7.82843 10.9999H5V12.9999H6.81873L4.81873 14.9999H4C3.44772 14.9999 3 14.5522 3 13.9999V9.99995C3 9.44766 3.44772 8.99995 4 8.99995H7L11.1464 4.8535C11.4614 4.53852 12 4.7616 12 5.20706Z" fill="white"/></svg>';
+            } else {
+                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 8.99995H4C3.44772 8.99995 3 9.44767 3 9.99995V14C3 14.5522 3.44772 15 4 15H7L11.1464 19.1464C11.4614 19.4614 12 19.2383 12 18.7928V5.20706C12 4.76161 11.4614 4.53852 11.1464 4.8535L7 8.99995ZM7.82843 11L10 8.82838V15.1715L7.82843 13H5V11H7.82843Z" fill="white"/><path d="M14.8887 15.8891C15.084 16.0843 15.4023 16.0856 15.5807 15.8747C15.9804 15.4022 16.3053 14.8698 16.5429 14.2961C16.8444 13.5681 16.9996 12.7879 16.9996 12C16.9996 11.212 16.8444 10.4318 16.5429 9.70386C16.3053 9.13016 15.9804 8.59778 15.5807 8.1252C15.4023 7.91436 15.084 7.91562 14.8887 8.11088L14.1973 8.80227C14.002 8.99753 14.0049 9.31245 14.1744 9.53042C14.3953 9.81428 14.5775 10.1271 14.7157 10.4607C14.9178 10.9487 15.0218 11.4718 15.0218 12C15.0218 12.5282 14.9178 13.0512 14.7157 13.5392C14.5775 13.8728 14.3953 14.1856 14.1744 14.4695C14.0049 14.6875 14.002 15.0024 14.1973 15.1977L14.8887 15.8891Z" fill="white"/><path d="M18.4152 18.7088C18.2299 18.9136 17.9123 18.9128 17.7171 18.7175L17.0254 18.0259C16.8302 17.8306 16.8315 17.5151 17.0142 17.308C17.5993 16.645 18.0715 15.8889 18.4108 15.0699C18.8139 14.0966 19.0214 13.0535 19.0214 12C19.0214 10.9466 18.8139 9.90344 18.4108 8.93018C18.0715 8.11112 17.5993 7.35504 17.0142 6.69204C16.8315 6.48499 16.8302 6.16941 17.0254 5.97414L17.7171 5.28251C17.9123 5.08725 18.2299 5.08642 18.4152 5.2912C19.1826 6.13947 19.7997 7.11409 20.2383 8.17319C20.7409 9.38644 20.9995 10.6868 20.9995 12C20.9995 13.3132 20.7409 14.6136 20.2383 15.8269C19.7997 16.886 19.1826 17.8606 18.4152 18.7088Z" fill="white"/></svg>';
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
