@@ -338,7 +338,7 @@
             </a>
             <div class="modal__image">
                 <video id="video" muted autoplay playsinline loop>
-                    <source id="source" src="https://cdn.playable.video/editor/6104873455845376/clickplay.mp4"
+                    <source id="source" src="https://cdn.playable.video/editor/6577238220472320/clickplay.mp4"
                         type="video/mp4">
                 </video>
             </div>
