@@ -6,9 +6,7 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Object Sans' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Object+Sans|Noto+Sans" rel="stylesheet">
     <title>Test IAM™</title>
     <style>
         :root {
@@ -110,8 +108,8 @@
         .modal {
             /* foreground modal */
             height: auto;
-            max-width: 380px;
-            flex-basis: 380px;
+            max-width: 300px;
+            flex-basis: 300px;
             margin: auto;
             display: flex;
             flex-direction: column;
@@ -123,9 +121,9 @@
         .modal__image {
             /* image container */
             max-height: 400px;
-            max-width: 340px;
+            max-width: 260px;
             margin: auto;
-            margin-top: 70px;
+            margin-top: 50px;
             object-fit: cover;
             border-radius: 4px;
         }
@@ -149,7 +147,7 @@
         .modal__cross {
             /* close button */
             position: absolute;
-            top: 24px;
+            top: 15px;
             left: 16px;
             height: 24px;
             width: 24px;
@@ -163,7 +161,7 @@
         .modal__mute {
             /* mute button, if video has sound */
             position: absolute;
-            top: 24px;
+            top: 15px;
             right: 16px;
             height: 24px;
             width: 24px;
@@ -193,7 +191,7 @@
             line-height: 1.25;
             color: #ffffff;
             text-align: center;
-            max-width: 340px;
+            max-width: 260px;
         }
 
         .modal__text {
@@ -205,7 +203,7 @@
             line-height: 1.25;
             color: #ffffff;
             text-align: center;
-            max-width: 340px;
+            max-width: 260px;
         }
 
         .modal__button-wrap {
@@ -327,14 +325,7 @@
                 </svg>
             </a>
             <a button-id="mute" class="modal__mute" onclick="toggleSound();brazeBridge.logClick('mute')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M20.7071 4.70698C21.0976 4.31646 21.0976 3.6833 20.7071 3.29277C20.3166 2.90225 19.6834 2.90225 19.2929 3.29277L3.29289 19.2928C2.90237 19.6833 2.90237 20.3165 3.29289 20.707C3.68342 21.0975 4.31658 21.0975 4.70711 20.707L8.70707 16.707L11.1464 19.1464C11.4614 19.4614 12 19.2383 12 18.7928V13.4141L20.7071 4.70698Z"
-                        fill="white" />
-                    <path
-                        d="M12 5.20706V7.81868L10 9.81868V8.82838L7.82843 10.9999H5V12.9999H6.81873L4.81873 14.9999H4C3.44772 14.9999 3 14.5522 3 13.9999V9.99995C3 9.44766 3.44772 8.99995 4 8.99995H7L11.1464 4.8535C11.4614 4.53852 12 4.7616 12 5.20706Z"
-                        fill="white" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 512" fill="white"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"></path></svg>
             </a>
             <div class="modal__image">
                 <video id="video" muted autoplay playsinline loop>
@@ -353,10 +344,6 @@
         </div>
     </div>
 
-    <!-- Removing long press to open context menus in-app -->
-    <script type="text/javascript" src="https://raw.github.com/pisi/Longclick/master/jquery.longclick-min.js">
-    </script>
-
     <script>
 
         document.querySelectorAll('[data-button-id]').forEach(function (node) {
@@ -371,10 +358,9 @@
             video.muted = !video.muted;
             console.log('Sound toggled. Muted:', video.muted);
             if (video.muted) {
-                /*muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="rgba(0, 0, 0, 0.7)" viewBox="0 0 640 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"></path></svg>';*/
-                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.7071 4.70698C21.0976 4.31646 21.0976 3.6833 20.7071 3.29277C20.3166 2.90225 19.6834 2.90225 19.2929 3.29277L3.29289 19.2928C2.90237 19.6833 2.90237 20.3165 3.29289 20.707C3.68342 21.0975 4.31658 21.0975 4.70711 20.707L8.70707 16.707L11.1464 19.1464C11.4614 19.4614 12 19.2383 12 18.7928V13.4141L20.7071 4.70698Z" fill="white"/><path d="M12 5.20706V7.81868L10 9.81868V8.82838L7.82843 10.9999H5V12.9999H6.81873L4.81873 14.9999H4C3.44772 14.9999 3 14.5522 3 13.9999V9.99995C3 9.44766 3.44772 8.99995 4 8.99995H7L11.1464 4.8535C11.4614 4.53852 12 4.7616 12 5.20706Z" fill="white"/></svg>';
+                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 512" fill="white"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"></path></svg>';
             } else {
-                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 8.99995H4C3.44772 8.99995 3 9.44767 3 9.99995V14C3 14.5522 3.44772 15 4 15H7L11.1464 19.1464C11.4614 19.4614 12 19.2383 12 18.7928V5.20706C12 4.76161 11.4614 4.53852 11.1464 4.8535L7 8.99995ZM7.82843 11L10 8.82838V15.1715L7.82843 13H5V11H7.82843Z" fill="white"/><path d="M14.8887 15.8891C15.084 16.0843 15.4023 16.0856 15.5807 15.8747C15.9804 15.4022 16.3053 14.8698 16.5429 14.2961C16.8444 13.5681 16.9996 12.7879 16.9996 12C16.9996 11.212 16.8444 10.4318 16.5429 9.70386C16.3053 9.13016 15.9804 8.59778 15.5807 8.1252C15.4023 7.91436 15.084 7.91562 14.8887 8.11088L14.1973 8.80227C14.002 8.99753 14.0049 9.31245 14.1744 9.53042C14.3953 9.81428 14.5775 10.1271 14.7157 10.4607C14.9178 10.9487 15.0218 11.4718 15.0218 12C15.0218 12.5282 14.9178 13.0512 14.7157 13.5392C14.5775 13.8728 14.3953 14.1856 14.1744 14.4695C14.0049 14.6875 14.002 15.0024 14.1973 15.1977L14.8887 15.8891Z" fill="white"/><path d="M18.4152 18.7088C18.2299 18.9136 17.9123 18.9128 17.7171 18.7175L17.0254 18.0259C16.8302 17.8306 16.8315 17.5151 17.0142 17.308C17.5993 16.645 18.0715 15.8889 18.4108 15.0699C18.8139 14.0966 19.0214 13.0535 19.0214 12C19.0214 10.9466 18.8139 9.90344 18.4108 8.93018C18.0715 8.11112 17.5993 7.35504 17.0142 6.69204C16.8315 6.48499 16.8302 6.16941 17.0254 5.97414L17.7171 5.28251C17.9123 5.08725 18.2299 5.08642 18.4152 5.2912C19.1826 6.13947 19.7997 7.11409 20.2383 8.17319C20.7409 9.38644 20.9995 10.6868 20.9995 12C20.9995 13.3132 20.7409 14.6136 20.2383 15.8269C19.7997 16.886 19.1826 17.8606 18.4152 18.7088Z" fill="white"/></svg>';
+                muteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 512" fill="white"><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"></path></svg>';
             }
         }
     </script>
