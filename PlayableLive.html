@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Object Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <title>Test IAM™</title>
+    <style>
+        :root {
+            --font-title: "Object Sans", sans-serif;
+            --font-button: "Object Sans", sans-serif;
+            --font-description: "Noto Sans", sans-serif;
+        }
+
+        /* Box sizing rules */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Remove default padding */
+        ul[class],
+        ol[class] {
+            padding: 0;
+        }
+
+        /* Remove default margin */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        ul[class],
+        ol[class],
+        li,
+        figure,
+        figcaption,
+        blockquote,
+        dl,
+        dd {
+            margin: 0;
+        }
+
+        /* Set core body defaults */
+        body {
+            scroll-behavior: smooth;
+            text-rendering: optimizeSpeed;
+            line-height: 1.25;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Remove list styles on ul, ol elements with a class attribute */
+        ul[class],
+        ol[class] {
+            list-style: none;
+        }
+
+        /* A elements that don't have a class get default styles */
+        a:not([class]) {
+            text-decoration-skip-ink: auto;
+        }
+
+        /* Make images easier to work with */
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Natural flow and rhythm in articles by default */
+        article>*+* {
+            margin-top: 1em;
+        }
+
+        /* Inherit fonts for inputs and buttons */
+        input,
+        button,
+        a,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button,
+        a {
+            border: none;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .overlay {
+            /* full screen overlay, dims background */
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+        }
+
+        .modal {
+            /* foreground modal */
+            height: auto;
+            max-width: 330px;
+            flex-basis: 330px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: rgba(21, 23, 30, 1);
+            border-radius: 10px;
+        }
+
+        .modal__img {
+            border-radius: 10px 10px 0px 0px;
+            overflow: hidden;
+        }
+
+        .modal__content {
+            /* text container below image */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 32px 16px 32px 16px;
+        }
+
+        .modal__cross {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            height: 28px;
+            width: 28px;
+            cursor: pointer;
+            z-index: 1;
+            border-radius: 50%;
+            background: rgba(128, 128, 128, .2);
+            display: flex !important;
+            justify-content: center;
+            padding: 1px;
+        }
+
+        .modal__title {
+            /* title text */
+            margin-bottom: 8px;
+            font-size: 16px;
+            line-height: 1.2;
+            color: #ffffff;
+            font-family: var(--font-title);
+            text-align: center;
+        }
+
+        .modal__sub-title {
+            /* description text */
+            margin: auto;
+            font-family: var(--font-description);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.25;
+            color: #ffffff;
+            text-align: center;
+            max-width: 340px;
+        }
+
+        .modal__text {
+            /* body text */
+            margin: auto;
+            font-family: var(--font-description);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.25;
+            color: #ffffff;
+            text-align: center;
+            max-width: 340px;
+        }
+
+        .modal__button-wrap {
+            /* button container */
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        .modal__btn {
+            /* button style */
+            border-radius: 4px;
+            font-family: var(--font-button);
+            font-weight: 700;
+            min-height: 40px;
+            max-height: 40px;
+            width: 160px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .modal__btn--main {
+            /* primary button style */
+            color: #ffffff;
+            font-size: 16px;
+            background-color: #0074E0;
+            background-size: 167px 40px;
+            background-repeat: no-repeat;
+        }
+
+        /* this is the secondary button style, can be used if they want the buttons to appear different*/
+        .modal__btn--secondary {
+            color: #ffffff;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.12);
+            background-size: 167px 40px;
+            background-repeat: no-repeat;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .fade {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show {
+            opacity: 1;
+        }
+
+        .txt-style {
+            border-radius: 20px;
+        }
+
+        /*Phones*/
+        /* Small devices (portrait tablets and large phones) */
+
+        @media (max-width: 360px) and (min-width: 0px) {
+
+            .modal__title {
+                font-size: 19px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 380px) and (min-width: 350px),
+        (max-height: 700px) and (min-height: 600px) {
+
+            .modal__title {
+                font-size: 19px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media (max-width: 400px) and (min-width: 380px),
+        (max-height: 800px) and (min-height: 700px) {
+
+            .modal__title {
+                font-size: 20px;
+            }
+
+            .modal__sub-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="modal">
+            <a data-button-id="close" class="modal__cross"
+                onclick="brazeBridge.logClick('close');brazeBridge.closeMessage()">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="rgba(0, 0, 0, 0.7)" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" part="icon blz-icon">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                </svg>
+            </a>
+            <div class="modal__img"> <!--Put snippet in this div-->
+
+                <!-- Playable Video, Patent No. 2,613,821 -->
+                <style>
+                    @media (-webkit-video-playable-inline) {
+                        *[playable] video {
+                            display: block !important;
+                        }
+
+                        *[playable] video~img {
+                            display: none !important;
+                        }
+                    }
+
+                    @keyframes playable-reveal {
+                        0% {
+                            opacity: 0;
+                            filter: blur(64px);
+                        }
+
+                        50% {
+                            filter: blur(0px);
+                        }
+
+                        100% {
+                            opacity: 1;
+                        }
+                    }
+                </style>
+                <!--[if mso 15]><style>*[playable] video { height: auto !important; }</style><![endif]--><!--[if mso]><table align="center" border="0" cellspacing="0" cellpadding="0"><tr><td align="center" valign="top" width="600"><![endif]-->
+                <div playable="Y2FyZWVyQHBsYXlhYmxlLnZpZGVv"
+                    style="background-image:url(https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/lowsrc.jpg);background-size:contain;background-repeat:no-repeat;background-position:center center;margin:0 auto;animation:playable-reveal 1s;max-width:600px;overflow:hidden;">
+                    <div
+                        style="background-image:url(https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/loading);background-size:auto 20%;background-repeat:no-repeat;background-position:center center;position:relative;height:0;max-height:0;padding-bottom:56%;">
+                        <a
+                            href="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/click/https://playable.video"><video
+                                style="max-width:600px;width:100%;height:436px;object-fit:contain;object-position:50% 50px;position:absolute;top:-50px;display:none;margin:0 auto;"
+                                poster="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/lowsrc.jpg"
+                                loop muted autoplay playsinline>
+                                <source media="(-webkit-video-playable-inline) and (-webkit-min-device-pixel-ratio: 3)"
+                                    src="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video@3x.mp4"
+                                    type="video/mp4">
+                                </source>
+                                <source media="(-webkit-video-playable-inline) and (-webkit-min-device-pixel-ratio: 2)"
+                                    src="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video@2x.mp4"
+                                    type="video/mp4">
+                                </source>
+                                <source media="(-webkit-video-playable-inline)"
+                                    src="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video.webm"
+                                    type="video/webm">
+                                </source>
+                                <source media="(-webkit-video-playable-inline)"
+                                    src="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video.mp4"
+                                    type="video/mp4">
+                                </source>
+                            </video><img width="100%" height="336"
+                                style="max-width:600px !important;width:100% !important;height:auto;position:absolute;display:block;margin:0 auto;"
+                                src="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video@2x"
+                                srcset="https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video@3x 1800w, https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video@2x 1200w, https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/video 600w, https://demo.playable.video/xid_demo:4925806161428480.uid_{{${user_id}}}/lowsrc.jpg 99w"
+                                sizes="(-webkit-video-playable-inline) 1vw, 100vw" alt="b'Pre-Stream Video'" /></a>
+                    </div>
+                </div><!--[if mso]></td></tr></table><![endif]-->
+                <!-- end Playable Video -->
+            </div>
+            <div class="modal__content">
+                <h1 id="title" class="modal__title">Watch Xbox Games Showcase LIVE!</h1>
+                <h2 id="sub_title" class="modal__sub-title">Join us as we unveil the upcoming games from Activision
+                    Blizzard, Bethesda and Xbox Game Studios.</h2>
+                <div id="options" class="modal__button-wrap">
+                    <a href="https://shop.battle.net/product/diablo-iv" class="modal__btn modal__btn--secondary"
+                        onclick="brazeBridge.logClick('Shop')">Watch Live Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        document.querySelectorAll('[data-button-id]').forEach(function (node) {
+            node.addEventListener('click', function () {
+                brazeBridge.closeMessage();
+            });
+        });
+
+        // Force video playback on load (helps in WebViews where autoplay might stall)
+
+        window.addEventListener('load', function () {
+
+            const video = document.querySelector('video');
+
+            if (video) {
+
+                video.play().catch(function (error) {
+
+                    console.log('Autoplay failed:', error);
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>
